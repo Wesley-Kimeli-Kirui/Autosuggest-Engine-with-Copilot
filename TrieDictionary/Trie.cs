@@ -12,6 +12,27 @@ public class TrieNode
         _value = value; // Assign the input value to the private field _value. This field holds the character value for this node.
     }
 
+    // Search for a word in the trie
+    /// <summary>
+    /// Searches for a specified word in the trie.
+    /// </summary>
+    /// <param name="word">The word to search for.</param>
+    /// <returns>True if the word is found in the trie, otherwise false.</returns>
+    public bool Search(string word)
+    {
+        TrieNode current = this;
+        foreach (char c in word)
+        {
+            if (!current.HasChild(c))
+            {
+                return false;
+            }
+            current = current.Children[c];
+        }
+        return current.IsEndOfWord;
+    }
+
+
     public bool HasChild(char c)
     {
         return Children.ContainsKey(c);
@@ -48,6 +69,11 @@ public class Trie
         return true;
     }
     
+    /// <summary>
+    /// Retrieves a list of suggested words based on the given prefix.
+    /// </summary>
+    /// <param name="prefix">The prefix to search for.</param>
+    /// <returns>A list of suggested words.</returns>
     public List<string> AutoSuggest(string prefix)
     {
         TrieNode currentNode = root;
@@ -64,7 +90,16 @@ public class Trie
 
     private List<string> GetAllWordsWithPrefix(TrieNode root, string prefix)
     {
-        return null;
+        List<string> words = new List<string>();
+        if (root.IsEndOfWord)
+        {
+            words.Add(prefix);
+        }
+        foreach (var child in root.Children)
+        {
+            words.AddRange(GetAllWordsWithPrefix(child.Value, prefix + child.Key));
+        }
+        return words;
     }
 
     public List<string> GetAllWords()

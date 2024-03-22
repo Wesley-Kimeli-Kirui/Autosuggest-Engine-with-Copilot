@@ -1,5 +1,6 @@
 ﻿using System.Text;
 
+
 string[] words = {
         "as", "astronaut", "asteroid", "are", "around",
         "cat", "cars", "cares", "careful", "carefully",
@@ -9,7 +10,7 @@ string[] words = {
         "the", "their", "they", "there", "towards"};
 
 Trie dictionary = InitializeTrie(words);
-// SearchWord();
+SearchWord();
 // PrefixAutocomplete();
 // DeleteWord();
 // GetSpellingSuggestions();
@@ -36,12 +37,12 @@ void SearchWord()
         {
             break;
         }
-        /*
+      
         if (input != null && dictionary.Search(input))
         {
             Console.WriteLine($"Found \"{input}\" in dictionary");
         }
-        */
+       
         else
         {
             Console.WriteLine($"Did not find \"{input}\" in dictionary");
@@ -66,14 +67,13 @@ void DeleteWord()
         {
             break;
         }
-        /*
+       
         if (input != null && dictionary.Search(input))
         {
             dictionary.Delete(input);
             Console.WriteLine($"Deleted \"{input}\" from dictionary\n");
             PrintTrie(dictionary);
-        }
-        */
+        }       
         else
         {
             Console.WriteLine($"Did not find \"{input}\" in dictionary");
